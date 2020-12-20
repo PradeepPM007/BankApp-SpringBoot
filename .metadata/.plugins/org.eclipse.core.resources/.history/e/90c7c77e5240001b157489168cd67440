@@ -1,0 +1,7 @@
+package appllication.dal.support;
+
+import application.dal.PayeeDao;
+
+public class PayeeDaoImpl implements PayeeDao{
+
+}

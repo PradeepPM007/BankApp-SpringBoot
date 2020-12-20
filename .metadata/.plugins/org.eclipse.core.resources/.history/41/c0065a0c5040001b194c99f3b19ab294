@@ -1,0 +1,17 @@
+package application.entity;
+
+@MappedSuperclass
+public class AbstractPayee implements Domain{
+
+	@Override
+	public String getApplicationId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setApplicationId(String applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+}

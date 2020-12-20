@@ -1,0 +1,8 @@
+package application.bll.support;
+
+import application.bll.RoleManager;
+import application.bll.UserManager;
+
+public class UserManagerImpl extends DefaultManagerImpl implements UserManager{
+
+}

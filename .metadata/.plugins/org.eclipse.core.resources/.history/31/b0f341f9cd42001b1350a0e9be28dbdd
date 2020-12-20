@@ -1,0 +1,9 @@
+package application;
+
+import application.bll.CustomerManager;
+
+public class TestCustomerManager {
+
+	CustomerManager customerManager
+	
+}

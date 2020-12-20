@@ -1,0 +1,26 @@
+package application.entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+
+import application.Entity.Client;
+
+@MappedSuperclass
+public class AbstractPayee implements Domain{
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+ 	private String applicationId;
+ 
+    private String name;
+    
+    private String accountNo;
+    
+    @ManyToOne
+    private Client owner;
+}

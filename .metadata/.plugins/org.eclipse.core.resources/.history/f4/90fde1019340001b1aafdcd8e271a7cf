@@ -1,0 +1,9 @@
+package application.bll.support;
+
+import org.springframework.stereotype.Service;
+
+import application.bll.RoleManager;
+@Service
+public class RoleManagerImpl extends DefaultManagerImpl implements RoleManager{
+
+}

@@ -1,0 +1,115 @@
+package application.controller;
+
+import application.bll.CustomerManager;
+import application.bll.RoleManager;
+import application.bll.UserManager;
+import application.entity.Customer;
+import application.entity.Role;
+import application.entity.User;
+
+import org.apache.catalina.mbeans.UserMBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.swing.undo.UndoManager;
+
+import java.sql.Timestamp;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
+/**
+ * Created by Vlad on 27-Mar-17.
+ */
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+    @Autowired
+    private CustomerManager customerManager;
+    
+    @Autowired
+    private RoleManager roleManager;
+    
+    @Autowired
+    private UserManager userManager;
+ 
+
+    @RequestMapping(value = "new", method = RequestMethod.GET)
+    public String newClient() {
+        return "admin/newCustomer";
+    }
+
+    @RequestMapping(value = "/newCustomer",method = RequestMethod.POST)
+    public String addClient(HttpServletRequest request) {
+    	try {
+    		Role role = roleManager.findByRole(request.getParameter("role"));
+        	User user = (User) customerManager.createNewTransientDomain(User.class.getName());
+            user.setUsername(request.getParameter("username"));
+            user.setPassword(request.getParameter("password"));
+        	user.setRoles(new HashSet<Role>(Arrays.asList(role)));
+        	userManager.executeSaveUser(user);
+        	
+        	Customer customer = (Customer) customerManager.createNewTransientDomain(Customer.class.getName());
+        	customer.setName(request.getParameter("name"));
+        	customer.setApplicationId(request.getParameter("applicationId"));
+        	customer.setAddress(request.getParameter("address"));
+        	customer.setEmail(request.getParameter("email"));
+        	customer.setCnp(request.getParameter("CNP"));
+        	customer.setUsername(user);
+        	customerManager.executeSaveCustomer(customer);
+    	}
+    	catch (Exception e) {
+    		return "/admin/new?error=true";
+		}
+    	
+    	    	
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/{applicationId}/editCutomer",method = RequestMethod.GET)
+    public String update(@PathVariable String applicationId, Model model) {
+        Customer customer = customerManager.findCutomerOnApplicationId(applicationId);
+        model.addAttribute("customer",customer);
+        return "admin/editCutomer";
+    }
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String updateClient(HttpServletRequest request, Model model) {
+    	Customer customer = (Customer) model.getAttribute("customer");
+    	customerManager.executeUpdateCustomer(customer);
+        return "redirect:/index";
+    }
+
+
+    @RequestMapping(value = "/viewCustomer",method = RequestMethod.GET)
+    public String view(Model model) {
+    	List<Customer> list = customerManager.findAll();
+        model.addAttribute("customer", list);
+        return "/viewCustomer";
+    }
+
+    @RequestMapping(value = "/searchCustomer",method = RequestMethod.GET)
+    public String displaySearch(){
+        return "admin/searchCustomer";
+    }
+    @RequestMapping(value = "/search",method = RequestMethod.POST)
+    public String search(HttpServletRequest request) {
+       
+    	String applicationId = request.getParameter("applicationId");
+    	String option = request.getParameter("option");
+    	if(option.equals("DELETE")) {
+            return "redirect:/admin/" + applicationId + "/deleteCutomer";
+        }
+        if(option.equals("EDIT")) {
+            return "redirect:/admin/" + applicationId + "/editCutomer";
+        }
+        return "redirect:/clientOp/search";
+    }
+}

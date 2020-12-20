@@ -1,0 +1,19 @@
+package application.entity;
+
+public class Customer extends AbstractCustomer {
+
+	public Customer() {
+	}
+	
+	public AbstractCustomer(long id, Boolean isActive, String applicationId, String name, String cnp, String email,
+			String address) {
+		super();
+		this.id = id;
+		this.isActive = isActive;
+		this.applicationId = applicationId;
+		this.name = name;
+		this.cnp = cnp;
+		this.email = email;
+		this.address = address;
+	}
+}

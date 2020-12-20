@@ -1,0 +1,7 @@
+package application.bll;
+
+public interface CustomerManager extends DefaultManager{
+
+	
+	public void executeSaveCustomer();
+}

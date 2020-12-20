@@ -1,0 +1,21 @@
+package application.bll.support;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+
+import application.bll.PayeeManager;
+import application.entity.Domain;
+@Service
+public class PayeeManagerImpl extends DefaultManagerImpl implements PayeeManager{
+
+	public Domain createNewTransientDomain(String domainClassName) {
+		Domain domain;
+		try {
+			domain = (Domain)BeanUtils.instantiateClass(Class.forName(domainClassName));
+		} catch (Exception e) {
+			throw new RuntimeException(domainClassName,e);
+		} 
+		
+		return domain;
+	}
+}

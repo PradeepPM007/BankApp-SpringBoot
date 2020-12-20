@@ -1,0 +1,9 @@
+package application.bll.support;
+
+import org.springframework.stereotype.Service;
+
+import application.bll.CustomerManager;
+@Service
+public class LogManagerImpl extends DefaultManagerImpl implements CustomerManager{
+
+}

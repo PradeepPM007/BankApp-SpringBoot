@@ -1,0 +1,13 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import application.Entity.Employee;
+import application.entity.Customer;
+
+@Repository
+public interface CustomerDao extends JpaRepository<Customer,Long>,DefaultDao{
+	Customer findByApplicationId(String applicationId);
+	
+}

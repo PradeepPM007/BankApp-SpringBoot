@@ -1,0 +1,17 @@
+db.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+db.username=fb
+db.pwd=fb123
+db.url=jdbc:sqlserver://localhost;databaseName=SpringBoot
+
+hibernate.dialect=org.hibernate.dialect.SQLServer2012Dialect
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.generate_statistics=false
+hibernate.hbm2ddl.auto=create
+
+entity.manager.packages.to.scan=application.Entity
+
+spring.datasource.initialization-mode=always
+
+security.basic.enabled=false
+server.port=8081

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<body>
+<div th:insert="common/common :: com"></div>
+
+	<table class="rwd-table">
+		<tr>
+			<th>ApplicationId</th>
+			<th>Name</th>
+		</tr>
+		<tr th:each="customer: ${customer}">
+			<td th:text="${customer.applicationId}" />
+			<td th:text="${customer.name}" />
+		</tr>
+	</table>
+</body>
+</html>

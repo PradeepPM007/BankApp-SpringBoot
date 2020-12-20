@@ -1,0 +1,18 @@
+package application.bll.support;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.bll.AccountManager;
+import application.dal.AccountDao;
+
+@Service
+public class AccountManagerImpl extends DefaultManagerImpl implements AccountManager{
+	
+	
+	@Autowired @Lazy
+	public void setDefaultDao(AccountDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+}

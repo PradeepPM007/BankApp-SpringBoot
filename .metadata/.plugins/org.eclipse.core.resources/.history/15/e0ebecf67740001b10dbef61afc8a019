@@ -1,0 +1,7 @@
+package application.entity;
+
+public class Customer extends AbstractCustomer {
+
+	public Customer() {
+	}
+}

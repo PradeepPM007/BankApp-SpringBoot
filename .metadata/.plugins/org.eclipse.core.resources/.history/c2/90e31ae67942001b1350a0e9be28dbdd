@@ -1,0 +1,9 @@
+package application.bll;
+
+import application.entity.Customer;
+
+public interface PayeeManager extends DefaultManager{
+
+	Payee findPayeeByApplicationId(String applicationId);
+
+}

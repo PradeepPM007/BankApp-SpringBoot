@@ -1,0 +1,47 @@
+package application.bll.support;
+
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.Entity.Employee;
+import application.bll.CustomerManager;
+import application.dal.CustomerDao;
+import application.entity.Customer;
+import application.entity.Domain;
+@Service
+public class CustomerManagerImpl extends DefaultManagerImpl implements CustomerManager{
+	
+	@Autowired @Lazy
+	public void setDefaultDao(CustomerDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	private CustomerDao getCustomerDao() {
+		return (CustomerDao) getDefaultDao();
+	}
+
+	@Override
+	public void executeSaveCustomer(Customer customer) {
+		getCustomerDao().save(customer);
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		return getCustomerDao().findAll();
+	}
+
+	@Override
+	public Customer findCutomerOnApplicationId(String applicationId) {
+		return getCustomerDao().findByApplicationId(applicationId);
+	}
+
+	@Override
+	public void executeUpdateCustomer(Customer customer) {
+		// TODO Auto-generated method stub
+		
+	}
+}

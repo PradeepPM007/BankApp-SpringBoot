@@ -1,0 +1,8 @@
+package appllication.dal.support;
+
+import org.springframework.stereotype.Repository;
+
+import application.dal.CustomerDao;
+public class CustomerDaoImpl {
+
+}

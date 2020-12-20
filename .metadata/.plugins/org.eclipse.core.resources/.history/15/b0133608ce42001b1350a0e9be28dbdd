@@ -1,0 +1,12 @@
+package application;
+
+import org.mockito.InjectMocks;
+
+import application.bll.CustomerManager;
+
+public class TestCustomerManager {
+
+	@InjectMocks
+	CustomerManager customerManager;
+	
+}

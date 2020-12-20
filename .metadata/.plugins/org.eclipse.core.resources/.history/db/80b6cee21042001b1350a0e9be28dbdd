@@ -1,0 +1,21 @@
+package application.bll.support;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import application.bll.CustomerManager;
+import application.bll.LogManager;
+import application.dal.CustomerDao;
+@Service
+public class LogManagerImpl extends DefaultManagerImpl implements LogManager{
+
+	@Autowired
+	public void setDefaultDao(LogDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	private LogDao getLogDao() {
+		return (LogDao) getDefaultDao();
+	}
+	
+}

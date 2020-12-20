@@ -1,0 +1,11 @@
+package application.entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Customer extends AbstractCustomer {
+
+	public Customer() {
+		 super();
+	}
+}

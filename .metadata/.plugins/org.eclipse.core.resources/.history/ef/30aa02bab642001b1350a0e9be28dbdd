@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<body>
+<div th:insert="common/common :: com"></div>
+<table class="rwd-table">
+    <tr>
+        <th>ID</th>
+        <th>Operation</th>
+        <th>Date</th>
+    </tr>
+    <tr th:each="log : ${report}" >
+        <td th:text="${log.id}">ID</td>
+        <td th:text="${log.operation}">Operation</td>
+        <td th:text="${log.timestamp}">Date</td>
+    </tr>
+</table>
+</body>
+
+</html>

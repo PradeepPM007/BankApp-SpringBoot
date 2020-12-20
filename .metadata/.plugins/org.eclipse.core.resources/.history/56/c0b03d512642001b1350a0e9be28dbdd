@@ -1,0 +1,6 @@
+package application.bll;
+
+
+public interface AccountManager extends DefaultManager{
+
+}

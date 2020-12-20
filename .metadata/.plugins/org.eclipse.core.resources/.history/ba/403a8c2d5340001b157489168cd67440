@@ -1,0 +1,10 @@
+package appllication.dal.support;
+
+import org.springframework.stereotype.Repository;
+
+import application.dal.AccountDao;
+
+@Repository
+public class AccountDaoImpl implements AccountDao{
+
+}

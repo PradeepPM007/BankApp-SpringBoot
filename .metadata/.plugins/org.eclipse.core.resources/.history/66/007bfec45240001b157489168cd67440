@@ -1,0 +1,9 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import application.entity.Account;
+
+public interface CustomerDao extends JpaRepository<Customer,Long>{
+
+}

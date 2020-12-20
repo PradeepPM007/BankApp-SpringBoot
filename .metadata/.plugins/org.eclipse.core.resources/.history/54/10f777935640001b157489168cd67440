@@ -1,0 +1,36 @@
+package application.entity;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class AbstractCustomer implements Domain{
+
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.AUTO)
+	    private long id;
+
+	 private String applicationId;
+	 
+	    private String name;
+
+	    private String cnp;
+
+	    private String email;
+
+	    private String address;
+	
+	@Override
+	public String getApplicationId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setApplicationId(String applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+}

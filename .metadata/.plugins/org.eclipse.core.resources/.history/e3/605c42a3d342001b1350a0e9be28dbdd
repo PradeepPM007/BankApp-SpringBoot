@@ -1,0 +1,41 @@
+package application;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import application.bll.CustomerManager;
+import application.dal.CustomerDao;
+import application.entity.Customer;
+
+public class TestCustomerManager {
+
+	@InjectMocks
+	CustomerManager customerManager;
+	
+	@Mock
+    CustomerDao dao;
+ 
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+    
+    @Test
+    public void getEmployeeByIdTest()
+    {
+    	Customer customer = new Customer();
+    	customer.setId(1l);
+    	when(dao.getOne(1L)).thenReturn(customer);
+    	Customer cust = customerManager.findOne(1);
+    	assertEquals(1L, cust.getId());
+    	verify(dao).g
+    }
+	
+}

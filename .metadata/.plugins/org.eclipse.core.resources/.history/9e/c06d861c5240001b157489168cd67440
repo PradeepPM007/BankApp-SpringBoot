@@ -1,0 +1,10 @@
+package application.bll.support;
+
+import org.springframework.beans.BeanUtils;
+
+import application.bll.AccountManager;
+import application.entity.Domain;
+
+public class AccountManagerImpl implements AccountManager{
+	
+}

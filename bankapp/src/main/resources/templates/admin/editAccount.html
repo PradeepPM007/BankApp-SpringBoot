@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+
+<body>
+<div th:insert="common/common :: com"></div>
+<div class="main main-agileits">
+
+    <div class="main-agilerow">
+        <div class="signup-wthreetop">
+            <h2>Edit Account</h2>
+        </div>
+        <div th:if="${param.error}" align="center">
+            Invalid data! Please check again.
+        </div>
+        <div class="contact-wthree">
+            <form th:action="@{/account/update}" method="post" th:object="${account}">
+                <div class="form-w3step1">
+                    <input type="text" th:value="${account.applicationId}" name="applicationId" readonly/>
+                 	<input type="text" th:value="${account.AccountNo}" name="AccountNo" readonly/>
+                    <input type="text" th:value="${account.type}" name="type" placeholder="Type"/>
+                    <input type="text" th:value="${account.balance}" name="balance" placeholder="Balance"/>
+                </div>
+                <button type="submit">Submit changes</button> 
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+package application.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import application.bll.CustomerManager;
+import application.bll.PayeeManager;
+import application.bll.UserManager;
+import application.entity.Customer;
+import application.entity.Payee;
+import application.entity.User;
+
+@Controller
+@RequestMapping("/customer")
+public class CustomerController {
+
+	@Autowired
+	PayeeManager payeeManager;
+	
+	@Autowired
+	CustomerManager customerManager;
+	
+	@Autowired
+    private UserManager userManager;
+
+	@RequestMapping(value = "new", method = RequestMethod.GET)
+	public String newPayee() {
+		return "customerOp/newCustomer";
+	}
+	
+	
+	 @RequestMapping(value = "/newCustomer",method = RequestMethod.POST)
+	 public String addPayee(HttpServletRequest request) {
+		 try {
+		User activeUser = userManager.findByUsername(request.getRemoteUser());
+		Customer loggedInCustomer =  (Customer) customerManager.findCustomerByUser(activeUser);
+		 
+		 Payee payee = (Payee) payeeManager.createNewTransientDomain(Payee.class.getName());
+		 payee.setName(request.getParameter("name"));
+		 payee.setApplicationId(request.getParameter("applicationId"));
+		 payee.setAccountNo(request.getParameter("accountNo"));
+		 
+		 if(loggedInCustomer != null) {
+			 payee.setOwner(loggedInCustomer);
+		 }
+		 }
+	    	catch (Exception e) {
+	    		return "redirect:/customerOp/new?error=true";
+			}
+		 
+	 }
+}

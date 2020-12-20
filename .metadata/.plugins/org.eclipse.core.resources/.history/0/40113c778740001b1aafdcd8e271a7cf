@@ -1,0 +1,18 @@
+package application.entity;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * Created by Vlad on 26-Mar-17.
+ */
+
+
+@Entity
+@Table(name="User")
+public class User extends AbstractUser{
+
+    public User() {
+    	 super();
+    }
+
+}

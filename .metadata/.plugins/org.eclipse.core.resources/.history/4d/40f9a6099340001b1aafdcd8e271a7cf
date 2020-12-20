@@ -1,0 +1,9 @@
+package application.bll.support;
+
+import org.springframework.stereotype.Service;
+
+import application.bll.UserManager;
+@Service
+public class UserManagerImpl extends DefaultManagerImpl implements UserManager{
+
+}

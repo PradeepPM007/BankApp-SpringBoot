@@ -1,0 +1,5 @@
+insert into User values(1, 'admin', 'admin', 'Admin');
+
+INSERT INTO Role VALUES
+    ( '1',  'ADMIN',   SELECT id from foo WHERE type='blue' ),
+    ( 'another row', SELECT id from foo WHERE type='red'  );

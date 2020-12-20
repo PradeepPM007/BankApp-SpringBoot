@@ -1,0 +1,5 @@
+package appllication.dal.support;
+
+public class CustomerDaoImpl {
+
+}

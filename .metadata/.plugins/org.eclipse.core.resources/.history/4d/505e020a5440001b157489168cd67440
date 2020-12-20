@@ -1,0 +1,10 @@
+package application.bll.support;
+
+import org.springframework.stereotype.Service;
+
+import application.bll.AccountManager;
+
+@Service
+public class AccountManagerImpl extends DefaultManagerImpl implements AccountManager{
+	
+}

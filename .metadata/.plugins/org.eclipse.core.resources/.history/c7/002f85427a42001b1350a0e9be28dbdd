@@ -1,0 +1,19 @@
+package application.dal;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import application.entity.Customer;
+import application.entity.User;
+
+@Repository
+public interface CustomerDao extends JpaRepository<Customer,Long>,DefaultDao{
+	
+	Customer findByApplicationId(String applicationId);
+	@Transactional
+	void deleteByApplicationId(String applicationId);
+	Customer loadCustomerByUsername(User username);
+	
+}

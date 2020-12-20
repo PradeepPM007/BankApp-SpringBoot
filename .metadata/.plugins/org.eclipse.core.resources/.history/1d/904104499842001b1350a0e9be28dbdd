@@ -1,0 +1,119 @@
+package application.controller;
+
+import java.sql.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import application.bll.AccountManager;
+import application.bll.CustomerManager;
+import application.bll.UserManager;
+import application.entity.Account;
+import application.entity.Customer;
+import application.entity.User;
+import application.validator.AccountValidator;
+
+/**
+ * Created by Vlad on 27-Mar-17.
+ */
+@Controller
+@RequestMapping("/account")
+public class AccountController {
+
+    @Autowired
+    private AccountManager accountManager;
+
+    @Autowired
+    private CustomerManager customerManager;
+
+    private AccountValidator validator;
+    
+    @Autowired
+	private UserManager userManager;
+
+    @RequestMapping(value = "new",method = RequestMethod.GET)
+    public String newAccount() {
+        return "admin/newAccount";
+    }
+
+    @RequestMapping(value = "/newAccount", method = RequestMethod.POST)
+    public String addAccount(HttpServletRequest request) {
+        Account account = (Account) accountManager.createNewTransientDomain(application.entity.Account.class.getName());
+        account.setBalance(Double.parseDouble(request.getParameter("balance")));
+        account.setDate(new Date(System.currentTimeMillis()));
+        account.setType(request.getParameter("type"));
+        validator = new application.validator.AccountValidator();
+        Customer customer = customerManager.findCutomerOnApplicationId(request.getParameter("cApplicationId"));
+        if(customer != null)
+            account.setOwner(customer);
+        else
+            return "redirect:admin/newAccount?error=true";
+        if(validator.validate(account))
+        	accountManager.executeSave(account);
+        else
+            return "admin/newAccount?error=true";
+
+        return "redirect:/index";
+    }
+
+    
+    @RequestMapping(value = "/{applicationId}/editAccount",method = RequestMethod.GET)
+    public String update(@PathVariable String applicationId, Model model, HttpServletRequest request) {
+    	Account account = accountManager.findAccountOnApplicationId(applicationId);
+        model.addAttribute("account",account);
+        return "admin/editAccount";
+    }
+
+    @RequestMapping(value = "update",method = RequestMethod.POST)
+    public String updateAccount(HttpServletRequest request) {
+    	Account account = accountManager.findAccountOnApplicationId(request.getParameter("applicationId"));
+        account.setBalance(Double.parseDouble(request.getParameter("balance")));
+        account.setType(request.getParameter("type"));
+
+        if(validator.validate(account))
+        	accountManager.executeSave(account);
+        else
+            return "account/new?error=true";
+
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value = "/viewAccount",method = RequestMethod.GET)
+    public String view(HttpServletRequest request, Model model) {
+    	User activeUser = userManager.findByUsername(request.getRemoteUser());
+    	List<Account> list = accountManager.findAccountByUser(activeUser);
+        model.addAttribute("account", list);
+        return "/viewAccount";
+    }
+
+//    @RequestMapping(value = "/{id}/delete",method = RequestMethod.GET)
+//    public String delete(@PathVariable long id) {
+//        accountRepository.delete(id);
+//        return "redirect:/index";
+//    }
+
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public String displaySearch(){
+        return "account/searchAccount";
+    }
+    @RequestMapping(value = "/searchAccount",method = RequestMethod.POST)
+    public String search(HttpServletRequest request) {
+        String option = request.getParameter("option");
+        if(option.equals("EDIT")) {
+            return "redirect:/account/" + request.getParameter("applicationId") + "/edit";
+        }
+        if(option.equals("DELETE")) {
+            return "redirect:/account/" + request.getParameter("applicationId") + "/delete";
+        }
+        return "redirect:/account/search";
+    }
+
+
+}

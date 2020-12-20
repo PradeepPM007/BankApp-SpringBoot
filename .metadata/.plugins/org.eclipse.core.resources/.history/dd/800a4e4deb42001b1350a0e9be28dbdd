@@ -1,0 +1,21 @@
+db.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+db.username=fb
+db.pwd=fb123
+db.url=jdbc:sqlserver://localhost;databaseName=SpringBoot
+
+hibernate.dialect=org.hibernate.dialect.SQLServer2008Dialect
+hibernate.show_sql=true
+hibernate.format_sql=true
+hibernate.generate_statistics=false
+hibernate.hbm2ddl.auto=update
+
+entity.manager.packages.to.scan=application.Entity
+
+spring.datasource.initialization-mode=always
+
+security.basic.enabled=false
+server.port=8081
+
+spring.queries.users-query=select username, password, enabled from usern where username=?
+spring.queries.roles-query=select u.username, r.role from usern u inner join user_role ur on(u.user_id=ur.user_id) inner join role r on(ur.role_id=r.role_id) where u.username=?
+

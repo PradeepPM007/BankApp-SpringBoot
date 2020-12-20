@@ -1,0 +1,13 @@
+package appllication.dal.support;
+
+import org.springframework.stereotype.Repository;
+
+import application.dal.PayeeDao;
+
+public class PayeeDaoImpl {
+
+	@Autowired @Lazy
+	public void setDefaultDao(PayeeDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+}

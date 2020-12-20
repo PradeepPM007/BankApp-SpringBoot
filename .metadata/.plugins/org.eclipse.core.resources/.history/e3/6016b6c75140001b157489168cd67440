@@ -1,0 +1,20 @@
+package application.bll.support;
+
+import org.springframework.beans.BeanInstantiationException;
+import org.springframework.beans.BeanUtils;
+
+import application.bll.AccountManager;
+import application.entity.Domain;
+
+public class AccountManagerImpl implements AccountManager{
+
+	
+	public Domain createNewTransientDomain(String domainClassName) {
+		
+		try {
+			Domain domain = (Domain)BeanUtils.instantiateClass(Class.forName(domainClassName));
+		} catch (Exception e) {
+			throw new RuntimeException(domainClassName,e);
+		} 
+	}
+}

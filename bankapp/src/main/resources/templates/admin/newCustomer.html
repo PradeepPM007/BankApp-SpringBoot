@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<body>
+<div th:insert="common/common :: com"></div>
+<div class="main main-agileits">
+
+    <div class="main-agilerow">
+        <div class="signup-wthreetop">
+            <h2>Enter Customer information</h2>
+        </div>
+        <div th:if="${param.error}" align="center">
+            Invalid data! Please check again.
+        </div>
+        <div class="contact-wthree">
+            <form th:action="@{/admin/newCustomer}" method="post">
+                <div class="form-w3step1">
+                <input type="text" name="username" placeholder="Username" required="required"/>
+                    <input type="text" name="password" placeholder="Password" required="required"/>
+                    <input type="text" name="applicationId" placeholder="ApplicationId" required="required"/>
+                    <input type="text" name="name" placeholder="Name" required="required"/>
+                    <input type="text" value="" placeholder="Address" name="address"/>
+                    <input type="text" value="" placeholder="Status" name="status"/>
+                    <input type="hidden" value="[[${#httpServletRequest.remoteUser}]]" name="user"/>
+                    <input type="email" class="email agileits-btm" name="email" placeholder="Email" required="required"/>
+                	<select name="role">
+                        <option value="ROLE_USER">User</option>
+                        <option value="ROLE_ADMIN">Admin</option>
+                    </select>
+                </div>
+                <input type="submit" value="Add new Customer"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

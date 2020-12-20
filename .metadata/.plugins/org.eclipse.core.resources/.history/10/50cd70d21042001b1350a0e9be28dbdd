@@ -1,0 +1,10 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import application.entity.Customer;
+import application.entity.Log;
+
+public interface LogDao extends JpaRepository<Log,Long>,DefaultDao{
+
+}

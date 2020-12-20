@@ -1,0 +1,28 @@
+package application.bll.support;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.bll.PayeeManager;
+import application.entity.Domain;
+@Service
+public class PayeeManagerImpl extends DefaultManagerImpl implements PayeeManager{
+
+	@Autowired @Lazy
+	public void setDefaultDao(CusomerDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	public Domain createNewTransientDomain(String domainClassName) {
+		Domain domain;
+		try {
+			domain = (Domain)BeanUtils.instantiateClass(Class.forName(domainClassName));
+		} catch (Exception e) {
+			throw new RuntimeException(domainClassName,e);
+		} 
+		
+		return domain;
+	}
+}

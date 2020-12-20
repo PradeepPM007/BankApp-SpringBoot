@@ -1,0 +1,71 @@
+package application.bll.support;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import application.bll.CustomerManager;
+import application.dal.CustomerDao;
+import application.entity.Customer;
+import application.entity.Role;
+import application.entity.User;
+@Service
+public class CustomerManagerImpl extends DefaultManagerImpl implements CustomerManager{
+	
+	@Autowired
+	public void setDefaultDao(CustomerDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	private CustomerDao getCustomerDao() {
+		return (CustomerDao) getDefaultDao();
+	}
+
+	@Override
+	public void executeSaveCustomer(Customer customer) {
+		getCustomerDao().save(customer);
+	}
+
+	@Override
+	public List<Customer> findAll() {
+		return getCustomerDao().findAll();
+	}
+
+	@Override
+	public Customer findCutomerOnApplicationId(String applicationId) {
+		return getCustomerDao().findByApplicationId(applicationId);
+	}
+
+	@Override
+	public void executeUpdateCustomer(Customer customer) {
+		getCustomerDao().save(customer);
+		
+	}
+
+	@Override
+	public Customer findOne(long id) {
+	return getCustomerDao().findById(id).orElse(null);
+	}
+
+	@Override
+	public void executeDeleteByApplicationId(String applicationId) {
+			 getCustomerDao().deleteByApplicationId(applicationId);
+	}
+
+	@Override
+	public List<Customer> findCustomerByUser(User activeUser) {
+		List<Customer> list = new ArrayList<Customer>();
+		if(!CollectionUtils.isEmpty(activeUser.getRoles())) {
+			Role role = activeUser.getRoles().iterator().next();
+			if("ROLE_USER".equals(role.getRole())) {
+				Customer customer= 	getCustomerDao().loadCustomerByUsername(activeUser);
+				if(customer != null)list.add(customer);
+			}
+		}
+
+		return null;
+	}
+}

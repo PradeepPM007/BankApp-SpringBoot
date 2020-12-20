@@ -1,0 +1,10 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import application.entity.Log;
+@Repository
+public interface LogDao extends JpaRepository<Log,Long>,DefaultDao{
+
+}

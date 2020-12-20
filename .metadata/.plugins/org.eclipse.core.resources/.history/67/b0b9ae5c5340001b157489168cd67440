@@ -1,0 +1,9 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import application.entity.Payee;
+
+public interface PayeeDao extends JpaRepository<Payee,Long>{
+
+}

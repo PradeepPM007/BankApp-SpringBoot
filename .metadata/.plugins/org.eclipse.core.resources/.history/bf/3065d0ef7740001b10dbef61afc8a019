@@ -1,0 +1,9 @@
+package application.entity;
+
+public class Account extends AbstractAccount{
+
+	public Account() {
+	}
+
+	
+}

@@ -1,0 +1,13 @@
+package application.bll;
+
+import org.springframework.stereotype.Service;
+
+import application.entity.User;
+
+public interface UserManager extends DefaultManager{
+
+	void executeSaveUser(User user);
+
+	User findByUsername(String remoteUser);
+
+}

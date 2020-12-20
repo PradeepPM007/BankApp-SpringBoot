@@ -1,0 +1,9 @@
+package application.bll;
+
+import application.controller.Role;
+
+public interface RoleManager extends DefaultManager{
+
+	Role findByRole(String parameter);
+
+}

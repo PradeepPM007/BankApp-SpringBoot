@@ -1,0 +1,33 @@
+package application;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.web.servlet.MockMvc;
+
+import application.controller.CustomerController;
+import application.entity.Customer;
+
+@WebMvcTest(CustomerController.class)
+public class TestCustomerManager {
+
+	@Autowired
+	private MockMvc mockMvc;
+	
+    
+    @Test
+    public void getEmployeeByIdTest()
+    {
+    	Customer customer = new Customer();
+    	customer.setId(1l);
+    	when(dao.getOne(1L)).thenReturn(customer);
+    	Customer cust = customerManager.findOne(1);
+    	assertEquals(1L, cust.getId());
+    	verify(dao).getOne(1L);
+    }
+	
+}

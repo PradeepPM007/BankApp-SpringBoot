@@ -1,0 +1,29 @@
+package application.bll.support;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.bll.CustomerManager;
+import application.dal.AccountDao;
+import application.entity.Domain;
+@Service
+public class CustomerManagerImpl extends DefaultManagerImpl implements CustomerManager{
+
+	@Autowired @Lazy
+	public void setDefaultDao(AccountDao CustomerDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	public Domain createNewTransientDomain(String domainClassName) {
+		Domain domain;
+		try {
+			domain = (Domain)BeanUtils.instantiateClass(Class.forName(domainClassName));
+		} catch (Exception e) {
+			throw new RuntimeException(domainClassName,e);
+		} 
+		
+		return domain;
+	}
+}

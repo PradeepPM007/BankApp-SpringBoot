@@ -1,0 +1,9 @@
+package application.dal;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import application.entity.Customer;
+
+public interface RoleDao extends JpaRepository<Role,Long>,DefaultDao{
+
+}

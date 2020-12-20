@@ -1,0 +1,13 @@
+package application.entity;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Account extends AbstractAccount{
+
+	public Account() {
+		 super();
+	}
+
+	
+}

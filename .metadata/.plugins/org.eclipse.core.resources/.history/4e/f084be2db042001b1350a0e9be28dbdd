@@ -1,0 +1,9 @@
+package application.bll;
+
+import application.entity.Log;
+
+public interface LogManager extends DefaultManager{
+
+	void executeSave(Log log);
+
+}

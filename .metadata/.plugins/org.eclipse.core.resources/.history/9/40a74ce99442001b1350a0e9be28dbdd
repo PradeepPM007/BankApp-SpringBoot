@@ -1,0 +1,47 @@
+package application.bll.support;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.bll.AccountManager;
+import application.dal.AccountDao;
+import application.dal.CustomerDao;
+import application.entity.Account;
+import application.entity.User;
+
+@Service
+public class AccountManagerImpl extends DefaultManagerImpl implements AccountManager{
+	
+	
+	@Autowired @Lazy
+	public void setDefaultDao(AccountDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+	
+	private AccountDao getAccountDao() {
+		return (AccountDao) getDefaultDao();
+	}
+
+	@Override
+	public void executeSave(Account account) {
+		getAccountDao().save(account);
+	}
+
+	@Override
+	public Account findAccountOnApplicationId(String applicationId) {
+		return getAccountDao().findByApplicationId(applicationId);
+	}
+
+	@Override
+	public List<Account> findAll() {
+		return getAccountDao().findAll();
+	}
+
+	@Override
+	public List<Account> findAccountByUser(User activeUser) {
+		return getAccountDao().findByUsername(activeUser);
+	}
+}

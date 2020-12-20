@@ -1,0 +1,53 @@
+package application.bll.support;
+
+import java.util.List;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import application.bll.PayeeManager;
+import application.dal.AccountDao;
+import application.dal.PayeeDao;
+import application.entity.Domain;
+import application.entity.Payee;
+import application.entity.User;
+@Service
+public class PayeeManagerImpl extends DefaultManagerImpl implements PayeeManager{
+
+	@Autowired @Lazy
+	public void setDefaultDao(PayeeDao defaultDao) {
+		this.defaultDao = defaultDao;
+	}
+
+	private PayeeDao getPayeeDao() {
+		return (PayeeDao) getDefaultDao();
+	}
+
+	
+	@Override
+	public Payee findPayeeByApplicationId(String applicationId) {
+		return null;
+	}
+
+	@Override
+	public void executeUpdatePayee(Payee payee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void executeDeleteByApplicationId(String applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Payee> findPayeeByUser(User activeUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+}

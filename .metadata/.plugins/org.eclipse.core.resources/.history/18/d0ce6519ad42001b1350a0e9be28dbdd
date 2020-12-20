@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<body>
+<aside class="sidebar" th:fragment="com">
+    <div id="leftside-navigation" class="nano">
+        <ul class="nano-content">
+            <li>
+                <a th:href="@{/index}"><i class="fa fa-dashboard"></i><span>Home</span></a>
+            </li>
+            <li class="sub-menu" sec:authorize="hasRole('USER')">
+                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Payee Operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+
+                    <li><a th:href="@{/customerOp/new}">Add new Payee</a>
+                    </li>
+                    <li><a th:href="@{/customerOp/search}">Edit existing Payee</a>
+                    </li>
+                    <li><a th:href="@{/customerOp/viewPayee}">View existing Payee</a>
+                    </li>
+                </ul>
+                
+                <a href="javascript:void(0);"><i class="fa fa-table"></i><span>Account operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:href="@{/view/viewAccount}">View account information</a></li>
+                </ul>
+                
+             <ul>
+                    <li><a th:href="@{/view/viewCustomer}">View existing customer</a>
+                </li>
+                  </ul>
+            </li>
+            
+            
+            <li class="sub-menu" sec:authorize="hasRole('ADMIN')">
+                <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Account operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:href="@{/account/new}">Add new account</a>
+                    </li>
+                    <li><a th:href="@{/account/search}">Edit existing account</a>
+                    </li>
+                </ul>
+                
+                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Client Operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+
+                    <li><a th:href="@{/admin/new}">Add new customer</a>
+                    </li>
+                    <li><a th:href="@{/admin/search}">Edit existing customer</a>
+                </ul>
+                
+            </li>
+            
+            <li class="sub-menu">
+                <a th:href="@{/logout}"><i class="fa fa-text-height"></i><span>Log out</span></a>
+            </li>
+        </ul>
+    </div>
+</aside>
+</body>
+</html>

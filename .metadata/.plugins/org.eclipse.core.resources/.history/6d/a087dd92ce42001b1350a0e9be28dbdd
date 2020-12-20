@@ -1,0 +1,23 @@
+package application;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import application.bll.CustomerManager;
+import application.dal.CustomerDao;
+
+public class TestCustomerManager {
+
+	@InjectMocks
+	CustomerManager customerManager;
+	
+	@Mock
+    CustomerDao dao;
+ 
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+	
+}

@@ -1,0 +1,10 @@
+package application;
+
+import application.bll.CustomerManager;
+
+public class TestCustomerManager {
+
+	@InjectMocks
+	CustomerManager customerManager
+	
+}

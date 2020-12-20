@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+<head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel='stylesheet prefetch' href='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'/>
+
+    <link rel="stylesheet" type="text/css" th:src="@{/css/style2.css}" href="/css/style2.css"/>
+    <title>Home</title>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+</head>
+<body>
+<aside class="sidebar">
+    <div id="leftside-navigation" class="nano">
+        <ul class="nano-content">
+            <li>
+                <a th:href="@{/index}"><i class="fa fa-dashboard"></i><span>Home</span></a>
+            </li>
+            <li class="sub-menu" sec:authorize="hasRole('USER')">
+                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Payee Operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+
+                    <li><a th:href="@{/customerOp/new}">Add new Payee</a>
+                    </li>
+                    <li><a th:href="@{/customerOp/search}">Edit existing Payee</a>
+                    </li>
+                    <li><a th:href="@{/customerOp/search}">View existing Payee</a>
+                    </li>
+                </ul>
+                
+                <a href="javascript:void(0);"><i class="fa fa-table"></i><span>Account operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:href="@{/account/search}">View account information</a></li>
+                </ul>
+            </li>
+            
+            <li class="sub-menu" >
+                </li>
+                    <li><a th:href="@{/admin/viewCustomer}">View existing customer</a>
+                </li>
+            </li>
+            <li class="sub-menu" sec:authorize="hasRole('ADMIN')">
+                <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Account operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:href="@{/admin/newAccount}">Add new account</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchnewAccount}">Edit existing account</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchnewAccount}">View account information</a></li>
+                    <li><a th:href="@{/admin/searchnewAccount}">Delete client account</a> </li>
+
+                </ul>
+                
+                <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Client Operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+
+                    <li><a th:href="@{/admin/newCustomer}">Add new customer</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchCustomer}">Edit existing customer</a>
+                    </li>
+                    <li><a th:href="@{/admin/viewCustomer}">View existing customer</a>
+                    </li>
+                </ul>
+                
+                <a href="javascript:void(0);"><i class="fa fa fa-tasks"></i><span>Employee operations</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+                <ul>
+                    <li><a th:href="@{/admin/newEmployee}">Add new employee</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchEmployee}">Edit employee information</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchEmployee}">View employee information</a>
+                    </li>
+                    <li><a th:href="@{/admin/searchEmployee}">Delete employee</a>
+                    </li>
+                </ul>
+            </li>
+            
+            <li class="sub-menu">
+                <a th:href="@{/logout}"><i class="fa fa-text-height"></i><span>Log out</span></a>
+            </li>
+        </ul>
+    </div>
+</aside>
+<div class="main main-agileits">
+    <h1>Search Account by ID</h1>
+    <div class="main-agilerow">
+        <div class="signup-wthreetop">
+        </div>
+        <div class="contact-wthree">
+            <form th:action="@{/admin/search}" method="post">
+                <div class="form-w3step1">
+                    <select name="option">
+                        <option value="EDIT">Edit account information</option>
+                        <option value="DELETE">Delete account</option>
+                    </select>
+                    <input type="number" value="" placeholder="ID" name="applicationId" required="required"/>
+                    <input type="hidden" value="[[${#httpServletRequest.remoteUser}]]" name="user"/>
+                </div>
+                <input type="submit" value="Search"/>
+            </form>
+        </div>
+    </div>
+</div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+
+<script src="js/index.js"></script>
+
+
+
+</body>
+</html>

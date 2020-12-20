@@ -1,0 +1,24 @@
+package application.bll;
+
+import java.util.List;
+
+import application.entity.Customer;
+
+public interface CustomerManager extends DefaultManager{
+
+	
+	public void executeSaveCustomer(Customer customer);
+
+	public List<Customer> findAll();
+
+	public Customer findCutomerOnApplicationId(String applicationId);
+
+	public void executeUpdateCustomer(Customer customer);
+
+	public Customer findOne(long id);
+
+	public static void executeDeleteByApplicationId(String applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+}

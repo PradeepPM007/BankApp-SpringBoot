@@ -1,0 +1,28 @@
+package application.entity;
+
+public class Customer extends AbstractCustomer {
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public String getApplicationId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setApplicationId(String applicationId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
+}
